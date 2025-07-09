@@ -1,8 +1,8 @@
 # Development Workflow & AI Guidance Rules
 ## ✅ Always Rules (Cursor / Context Critical)
-- Always read `memory-bank/@architecture.md` before writing any code (includes full DB schema).
-- Always read `memory-bank/@game-design-document.md` before writing any code.
-- Always update `memory-bank/@architecture.md` after major features or milestone completions.
+- Always read `rules.md` before writing any code. 
+- Always read `PRD.md` before writing any code.
+- Always update `Architecture.md` after major/minor features or milestone completions.
 
 ## 🧹 Code Hygiene & Structure
 - Keep the codebase clean, readable, and well-organized.
@@ -28,11 +28,6 @@
 - Test and confirm every file or feature you modify.
 - Always include edge case tests, including invalid inputs or error flows.
 
-## 📝 Documentation & Logging
-- Log completed work in `progress.md` and next steps in `TODO.txt`.
-- Before major changes, draft an implementation plan in `plan.md` and await approval.
-- Maintain a central `rules.md` file in the codebase for continuous reference.
-
 
 # Coding Preferences Rules
 ## General Principles
@@ -48,8 +43,6 @@
 
 ## Documentation & Communication
 - **Self-Documenting Code:** Use clear naming to reduce the need for comments.
-- **Component Docs:** Document major components in `/docs/[component].md`.
-- **Architecture Doc:** Maintain a high-level overview in `/docs/architecture.md`.
 
 ## Environment & Testing
 - **Mocking Rule:** Use mock data only in tests, never in dev or prod.
