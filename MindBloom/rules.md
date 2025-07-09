@@ -1,251 +1,99 @@
+# Development Workflow & AI Guidance Rules
+## ✅ Always Rules (Cursor / Context Critical)
+- Always read `memory-bank/@architecture.md` before writing any code (includes full DB schema).
+- Always read `memory-bank/@game-design-document.md` before writing any code.
+- Always update `memory-bank/@architecture.md` after major features or milestone completions.
 
-# 🚀 MindBloom Development Rules
+## 🧹 Code Hygiene & Structure
+- Keep the codebase clean, readable, and well-organized.
+- Avoid files exceeding 200–300 lines; refactor when needed.
+- Use single-file scripts for small or one-off tasks.
+- Avoid duplication; reuse similar logic instead of rewriting.
+- Focus changes only on the relevant task or area.
+- Do not modify unrelated parts of the codebase.
+- Kill old testing servers/processes before starting new ones.
+- Always restart the server after making changes to test properly.
+- Keep diffs minimal—avoid widespread changes for small tasks.
 
-> **Version**: 1.1  
-> **Last Updated**: July 2025  
-> **Purpose**: Unified coding, architecture, workflow, and deployment standards for the MindBloom project.
+## 🧠 Implementation & Change Scope
+- Never drastically change existing patterns unless approved.
+- Avoid modifying architecture or deep patterns without explicit instruction.
+- Only make changes you fully understand and can explain.
+- If replacing code, remove the obsolete version to prevent duplication.
+- Rate-limit all API endpoints for security and performance.
+- Enable CAPTCHA on all sign-up and sensitive user flows.
 
----
+## 🧪 Testing & Validation
+- Use mock data only in test environments, never in dev or prod.
+- Test and confirm every file or feature you modify.
+- Always include edge case tests, including invalid inputs or error flows.
 
-## 📘 Architecture & Design First
+## 📝 Documentation & Logging
+- Log completed work in `progress.md` and next steps in `TODO.txt`.
+- Before major changes, draft an implementation plan in `plan.md` and await approval.
+- Maintain a central `rules.md` file in the codebase for continuous reference.
 
-- **Always read before coding**:
-  - `memory-bank/@architecture.md`
-  - `memory-bank/@game-design-document.md`
-- **Document-Driven Development**: No implementation without corresponding architecture.
-- **Update & commit** architecture docs with every major feature or milestone.
-- **Validate designs** for scalability, maintainability, and compatibility with current architecture.
-- **Discuss breaking changes** with the team before implementation.
 
----
+# Coding Preferences Rules
+## General Principles
+- **Simplicity:** Prefer the simplest working solution over clever abstractions.
+- **DRY:** Eliminate duplication by reusing code through functions or modules.
+- **KISS:** Avoid overengineering; keep code short and simple.
+- **YAGNI:** Don’t implement features until they’re actually needed.
 
-## 🧱 Code Quality & Structure
+## Architecture & Organization
+- **SOLID:** Follow SOLID principles to guide modular, maintainable design.
+- **File Size:** Keep source files under 300 lines; refactor when larger.
+- **Separation of Concerns:** Ensure each file or component has a single, clear responsibility.
 
-### 🔑 Core Principles
-- **Simplicity First**: Prioritize clarity over cleverness.
-- **Single Responsibility**: Each function/component should serve one purpose.
-- **DRY**: Avoid duplicating logic—reuse helpers and components.
-- **Strict Type Safety**: TypeScript in strict mode, no `any`.
-- **Minimal Scope of Change**: Modify only what’s necessary; no side edits.
+## Documentation & Communication
+- **Self-Documenting Code:** Use clear naming to reduce the need for comments.
+- **Component Docs:** Document major components in `/docs/[component].md`.
+- **Architecture Doc:** Maintain a high-level overview in `/docs/architecture.md`.
 
-### 🧼 Clean Code Standards
-- **Variable Names**: Descriptive, intention-revealing.
-- **Function Size**: Max 50 lines.
-- **File Size Limits**:
-  - Components: <200 lines
-  - Services: <300 lines
-  - Utils: <150 lines
-- **Nesting Depth**: Max 3 levels.
-- **Commenting**: Avoid unless explaining business-critical logic.
+## Environment & Testing
+- **Mocking Rule:** Use mock data only in tests, never in dev or prod.
+- **Error Handling:** Add fallback logic or error boundaries to all critical operations.
+- **Test Strategy:** Write tests for core paths; prefer integration tests over mocks.
 
-### 🚫 Forbidden Practices
-- No `console.log` in production (use logger).
-- No hardcoded values—use config/constants.
-- No TODOs without linked GitHub issues.
-- No commented-out code in commits.
+## Tooling & Stack
+- **Stack Control:** Do not add or change stack components without explicit approval.
+- **Dependency Hygiene:** Keep dependencies lean, current, and necessary.
 
----
+## Behavioral Safeguards
+- **Context Check:** Begin each response with a random emoji to confirm context retention.
+- **Token Efficiency:** Write concise outputs without losing clarity or depth.
+- **Guardrails:** Never alter stack/tools/config without user’s explicit go-ahead.
 
-## 📦 Project Structure
 
-```
-/src
-  /components     # UI components
-  /services       # Business logic, API calls
-  /utils          # Helper functions
-  /hooks          # Custom hooks
-  /store          # State management
-  /types          # Interfaces/types
-  /constants      # App constants
-  /config         # Environment/config setup
-  /assets         # Static assets
-/tests
-  /unit
-  /integration
-  /e2e
-/docs             # Project documentation
-```
+# Communication Preferences Rules
 
-### 📁 Naming Conventions
-| Type        | Convention          | Example               |
-|-------------|---------------------|------------------------|
-| Component   | PascalCase          | `UserProfile.tsx`     |
-| Service     | camelCase           | `userService.ts`      |
-| Utils       | camelCase           | `dateUtils.ts`        |
-| Constants   | SCREAMING_SNAKE_CASE| `API_ENDPOINTS.ts`    |
-| Types       | PascalCase + Suffix| `UserTypes.ts`        |
+- **Summaries:** After completing a component, provide a brief summary of what was done.
+- **Change Scale:** Classify every change as Small, Medium, or Large to set context.
+- **Clarification:** Ask before proceeding if any part of the request is unclear or underspecified.
+- **Planning:** For Large changes, present a step-by-step plan and wait for approval.
+- **Tracking:** Always state what’s completed, what’s in progress, and what’s pending.
+- **Emotional Cues:** When urgency or emphasis is expressed, increase precision and double-check critical paths.
+- **Context Anchoring:** Reiterate your understanding of the request before acting on complex tasks.
+- **Checkpointing:** For multi-step changes, confirm direction after each major step.
+- **Assumption Logging:** Explicitly state any assumptions made before or during implementation.
+- **Tone Matching:** Match the tone—concise, detailed, relaxed, or formal—to the style of the user request.
+- **Response Formatting:** Use clear, readable formatting (e.g., bullets, headings, code blocks) for all responses.
+- **Boundaries Respect:** Do not continue work or introduce changes beyond what’s explicitly requested or confirmed.
 
----
+# Workflow Preferences Rules
 
-## 🧪 Testing Standards
+- **Scoped Changes:** Modify only the code or areas I explicitly specify; leave all else untouched.
+- **Staged Execution:** Break large tasks into stages or milestones and pause after each for approval.
+- **Pre-Change Planning:** Before major changes, draft a `plan.md` and wait for confirmation before executing.
+- **Progress Logging:** Record completed work in `progress.md` and upcoming steps in `TODO.txt`.
+- **Testing Standards:** Include complete test coverage for major features and propose edge case tests (e.g., invalid input, null values).
+- **Context Management:** If context exceeds 100k tokens, summarize into `context-summary.md` and restart the session with the summary.
+- **Feedback-Driven Checkpoints:** Adjust checkpoint frequency based on my preference for granularity.
+- **Minimal Diff Principle:** Make the smallest diff possible to fulfill the task, minimizing unrelated changes.
+- **Reversion Safety:** Ensure all major changes can be easily reverted or rolled back.
+- **Dependency Awareness:** Flag external dependency changes (e.g., APIs, libraries) before applying them.
+- **Commit Hygiene:** Write meaningful commit messages summarizing intent, scope, and scale of the change.
+- **Manual Review Flagging:** Flag complex areas of the code that may need my manual review before continuing.
 
-### 🧪 Coverage & Strategy
-- **Minimum Coverage**: 80% overall, 90% for critical paths.
-- **Write Tests First** (TDD where practical).
-- **Types**:
-  - Unit: Services, logic
-  - Integration: APIs
-  - E2E: Critical flows
-  - Performance: Data-heavy ops
 
-### ✅ Test Cases
-- Happy path
-- Edge cases
-- Error handling
-- Load/performance
-
----
-
-## 📄 Documentation Standards
-
-### 📚 Requirements
-- **Architecture & System Design**
-- **Component Usage** (Props, Examples, Screenshots)
-- **API Docs** (OpenAPI/Swagger)
-- **Deployment Guides**  
-- **Changelogs** for user-facing or breaking changes
-
-### 📂 Structure
-```
-/docs
-  /api
-  /components
-  /architecture
-  /deployment
-  /examples
-```
-
----
-
-## 🔐 Security & Data Integrity
-
-### 🛡️ Secure Development
-- Use **bcrypt (12+ rounds)** for passwords
-- Use **JWT** with proper expiration & refresh
-- Use **rate limiting + CAPTCHA** on public auth endpoints
-- Validate and sanitize all input
-- Prevent **SQLi, XSS, CSRF**
-- Never commit secrets—use `.env`
-
-### 📦 Data Handling
-- Schema changes must go through `/migrations` with:
-  - Comments
-  - Backups
-  - Sample data testing
-- Index performance-critical fields
-- Enforce constraints both in code and DB
-
----
-
-## ⚙️ Workflow & Git Practices
-
-### 🧰 Development Flow
-1. Read architecture docs
-2. Create GitHub issue
-3. Use feature branch from `develop`
-4. Code, test, document
-5. Submit PR with clear title & description
-6. Get 2 reviews before merge
-
-### 🔀 Git Rules
-- **Conventional commits**: `feat:`, `fix:`, `chore:`, etc.
-- **Atomic commits**: One concern per commit
-- **Squash on merge**, then **delete branch**
-- **No re-orgs/renames** without team approval
-
----
-
-## 💬 Communication & Review
-
-- **Daily standups**: Share blockers and progress
-- **PR Reviews**:
-  - Timely (within 24 hrs)
-  - Constructive & respectful
-  - Ask questions if unclear
-- **Major architecture decisions**: Must be documented
-- **Notify team** on breaking changes
-
----
-
-## 🛠️ Technical Stack & Tooling
-
-### 🧱 Approved Stack
-| Area       | Tools                                   |
-|------------|------------------------------------------|
-| Frontend   | React 18+, TypeScript, Tailwind CSS      |
-| Backend    | Node.js, Express, PostgreSQL             |
-| Testing    | Jest, Playwright, React Testing Library  |
-| Tooling    | ESLint, Prettier, Husky, GitHub Actions  |
-
-### 🧰 Environment Setup
-- Use VSCode with shared config/extensions
-- Pre-commit: Lint + test via Husky
-- Lock dependencies and use lockfiles
-- Match local and production environments
-
----
-
-## ⚡ Performance & Optimization
-
-### 🎯 Targets
-- **Page Load**: <3s (3G)
-- **FCP**: <1.5s
-- **TTI**: <4s
-- **API Response**: <200ms @95%
-
-### ⚙️ Tactics
-- Code splitting by route
-- WebP/AVIF for images
-- Optimize bundle sizes
-- Cache aggressively
-- Profile before optimizing
-
----
-
-## 🚀 Deployment & Monitoring
-
-### 🌐 Environments
-- `dev`: Local
-- `staging`: Production-like
-- `prod`: Live with monitoring
-
-### 📦 Deployment Checklist
-- All tests pass
-- Security scan complete
-- Performance tests run
-- Rollback strategy in place
-
-### 📊 Monitoring
-- Health checks for all services
-- Error + performance logging
-- Tracing for distributed flows
-- User analytics
-
----
-
-## 📈 Continuous Improvement
-
-- **Monthly**: Review these rules
-- **Quarterly**: Security & performance audits
-- **Annually**: Stack evaluation
-- **Tech Talks**: Share best practices regularly
-
----
-
-## ✅ Pre-Commit Developer Checklist
-
-Before you push:
-- [ ] Read related architecture/docs
-- [ ] Modify only what’s necessary
-- [ ] Write/update tests
-- [ ] Follow existing patterns
-- [ ] Consider security/performance
-- [ ] Update docs if needed
-- [ ] Test locally with real data
-- [ ] Write a clear, conventional commit
-- [ ] Submit for review
-
----
-
-**These rules are evolving—contribute through discussion and updates when needed. Clarity, security, and teamwork come first.**  
-*Last updated: July 2025*
